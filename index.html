@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Юми кофе</title>
+<style>
+    /* ===== БАЗОВЫЕ СБРОСЫ И ПЕРЕМЕННЫЕ ===== */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    :root {
+        --coffee-dark: #3e2a1f;
+        --coffee-medium: #6b4423;
+        --coffee-light: #a67c52;
+        --cream: #f5ebdc;
+        --cream-soft: #faf4ea;
+        --accent: #c89b6c;
+        --text: #2d1f15;
+        --text-soft: #6b5a4d;
+        --border: #e6d9c3;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family: Georgia, 'Times New Roman', serif;
+        background-color: var(--cream-soft);
+        color: var(--text);
+        line-height: 1.6;
+    }
+
+    /* ===== НАВИГАЦИЯ ===== */
+    nav {
+        background-color: var(--coffee-dark);
+        padding: 18px 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 16px;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+
+    nav .logo {
+        color: var(--cream);
+        font-size: 1.3rem;
+        font-weight: bold;
+        letter-spacing: 1px;
+    }
+
+    nav ul {
+        list-style: none;
+        display: flex;
+        gap: 28px;
+        flex-wrap: wrap;
+    }
+
+    nav ul a {
+        color: var(--cream);
+        text-decoration: none;
+        font-size: 0.95rem;
+        transition: color 0.2s;
+    }
+
+    nav ul a:hover {
+        color: var(--accent);
+    }
+
+    section {
+        padding: 80px 40px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    h1, h2, h3 {
+        font-family: Georgia, serif;
+        color: var(--coffee-dark);
+    }
+
+    h2 {
+        font-size: 2.2rem;
+        margin-bottom: 30px;
+        text-align: center;
+        position: relative;
+    }
+
+    h2::after {
+        content: "";
+        display: block;
+        width: 60px;
+        height: 3px;
+        background-color: var(--accent);
+        margin: 14px auto 0;
+    }
+
+    /* ===== ПЕРВЫЙ ЭКРАН ===== */
+    .hero {
+        background-image: url('img/shop.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-color: rgba(45, 31, 21, 0.5);
+        background-blend-mode: multiply;
+        color: white;
+        text-align: center;
+        padding: 140px 40px;
+        max-width: none;
+        margin: 0;
+    }
+
+    .hero h1 {
+        font-size: 48px;
+        margin-bottom: 20px;
+        color: white;
+        letter-spacing: 2px;
+    }
+
+    .hero .subtitle {
+        font-size: 20px;
+        color: white;
+        margin-bottom: 14px;
+        font-family: Arial, sans-serif;
+    }
+
+    .hero .schedule {
+        display: inline-block;
+        font-size: 1.05rem;
+        color: white;
+        background-color: rgba(255, 255, 255, 0.15);
+        padding: 10px 22px;
+        border-radius: 30px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        margin-bottom: 40px;
+        font-family: Arial, sans-serif;
+    }
+
+    .btn {
+        display: inline-block;
+        background-color: var(--accent);
+        color: var(--coffee-dark);
+        padding: 14px 36px;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 1rem;
+        border-radius: 4px;
+        letter-spacing: 1px;
+        transition: background-color 0.2s;
+        border: none;
+        cursor: pointer;
+        font-family: Arial, sans-serif;
+    }
+
+    .btn:hover {
+        background-color: #d9ad7f;
+    }
+
+    /* ===== О КОФЕЙНЕ ===== */
+    .about-text {
+        max-width: 800px;
+        margin: 0 auto;
+        text-align: center;
+        font-size: 1.1rem;
+        color: var(--text-soft);
+    }
+
+    /* ===== ОСОБЕННОСТИ ===== */
+    .features {
+        background-color: var(--cream);
+        max-width: none;
+    }
+
+    .features-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 22px;
+        margin-top: 10px;
+    }
+
+    .feature-card {
+        background-color: var(--cream-soft);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 24px;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 14px rgba(62, 42, 31, 0.1);
+    }
+
+    .feature-card h3 {
+        font-size: 1.2rem;
+        color: var(--coffee-medium);
+        margin-bottom: 14px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid var(--accent);
+    }
+
+    .feature-card ul {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .feature-card li {
+        color: var(--text);
+        font-size: 0.98rem;
+        padding-left: 18px;
+        position: relative;
+    }
+
+    .feature-card li::before {
+        content: "•";
+        color: var(--accent);
+        position: absolute;
+        left: 0;
+        font-weight: bold;
+    }
+
+    .feature-card .highlight {
+        font-weight: bold;
+        color: var(--coffee-dark);
+    }
+
+    /* ===== ПРОФЕССИОНАЛЬНЫЙ БЛОК МЕНЮ ===== */
+    .menu-section {
+        padding: 80px 40px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .menu-section h2 {
+        font-size: 2.8rem;
+        margin-bottom: 50px;
+        color: var(--coffee-dark);
+    }
+
+    /* Sticky-панель табов */
+    .menu-tabs {
+        position: sticky;
+        top: 64px; /* высота навигации */
+        z-index: 50;
+        background-color: var(--cream-soft);
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+        padding: 0;
+        margin: 0 -40px 40px;
+        padding: 0 40px;
+    }
+
+    .menu-tabs-inner {
+        display: flex;
+        gap: 8px;
+        max-width: 1200px;
+        margin: 0 auto;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none; /* Firefox */
+    }
+
+    .menu-tabs-inner::-webkit-scrollbar {
+        display: none; /* Chrome/Safari */
+    }
+
+    .menu-tab {
+        flex: 0 0 auto;
+        background: none;
+        border: none;
+        border-bottom: 2px solid transparent;
+        padding: 18px 22px;
+        font-family: Arial, sans-serif;
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: var(--text-soft);
+        cursor: pointer;
+        transition: color 0.2s, border-color 0.2s;
+        white-space: nowrap;
+    }
+
+    .menu-tab:hover {
+        color: var(--coffee-medium);
+    }
+
+    .menu-tab.active {
+        color: var(--coffee-dark);
+        font-weight: 700;
+        border-bottom-color: var(--accent);
+    }
+
+    /* Секции категорий */
+    .menu-category {
+        margin-bottom: 60px;
+        scroll-margin-top: 140px; /* отступ для sticky табов */
+    }
+
+    .menu-category-header {
+        margin-bottom: 28px;
+    }
+
+    .menu-category h3 {
+        font-size: 1.8rem;
+        color: var(--coffee-medium);
+        margin-bottom: 10px;
+    }
+
+    .menu-category-line {
+        width: 40px;
+        height: 1px;
+        background-color: var(--accent);
+    }
+
+    /* Сетка карточек */
+    .menu-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+
+    /* Карточка позиции */
+    .menu-item {
+        position: relative;
+        background-color: var(--cream-soft);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 22px 24px;
+        display: flex;
+        align-items: flex-end;
+        gap: 12px;
+        transition: transform 0.25s ease-out, box-shadow 0.25s ease-out;
+        /* Начальное состояние для анимации появления */
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    .menu-item.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .menu-item:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 18px rgba(62, 42, 31, 0.12);
+    }
+
+    .menu-item.visible:hover {
+        transform: translateY(-3px);
+    }
+
+    /* Название и объём */
+    .menu-item-info {
+        flex: 1 1 auto;
+        min-width: 0;
+    }
+
+    .menu-item-name {
+        display: block;
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--coffee-dark);
+        line-height: 1.3;
+        margin-bottom: 3px;
+    }
+
+    .menu-item-volume {
+        display: block;
+        font-size: 0.85rem;
+        color: var(--text-soft);
+        font-weight: normal;
+        font-family: Arial, sans-serif;
+    }
+
+    /* Пунктирная линия-заполнитель (классический ресторанный приём) */
+    .menu-item-dots {
+        flex: 1 1 auto;
+        align-self: flex-end;
+        margin-bottom: 6px;
+        border-bottom: 1px dotted var(--accent);
+        min-width: 20px;
+        opacity: 0.6;
+    }
+
+    /* Цена */
+    .menu-item-price {
+        flex: 0 0 auto;
+        font-weight: bold;
+        color: var(--coffee-medium);
+        font-size: 1.05rem;
+        white-space: nowrap;
+        align-self: flex-end;
+        margin-bottom: 2px;
+    }
+
+    /* Бейджи */
+    .menu-badge {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        font-family: Arial, sans-serif;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        padding: 3px 8px;
+        border-radius: 4px;
+        color: white;
+        text-transform: uppercase;
+    }
+
+    .menu-badge.new {
+        background-color: var(--accent);
+    }
+
+    .menu-badge.hit {
+        background-color: var(--coffee-dark);
+    }
+
+    /* CTA-блок в конце меню */
+    .menu-cta {
+        margin-top: 40px;
+        padding: 32px;
+        background-color: rgba(200, 155, 108, 0.15);
+        border-radius: 8px;
+        text-align: center;
+    }
+
+    .menu-cta p {
+        font-size: 1.05rem;
+        color: var(--coffee-medium);
+        font-style: italic;
+    }
+
+    /* Кнопка «Вернуться к началу меню» */
+    .menu-back {
+        display: block;
+        text-align: center;
+        margin-top: 30px;
+        color: var(--accent);
+        text-decoration: none;
+        font-family: Arial, sans-serif;
+        font-size: 0.95rem;
+        font-weight: 600;
+        transition: color 0.2s;
+    }
+
+    .menu-back:hover {
+        color: var(--coffee-dark);
+    }
+
+    /* ===== ФОТО-ЗАГЛУШКИ ===== */
+    .photos {
+        background-color: var(--cream);
+        max-width: none;
+    }
+
+    .photos-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .photos-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 24px;
+    }
+
+    .photo-placeholder {
+        background-color: #e8dcc6;
+        border: 2px dashed var(--coffee-light);
+        border-radius: 10px;
+        height: 220px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: var(--coffee-medium);
+        font-size: 1.05rem;
+        font-style: italic;
+        padding: 20px;
+    }
+
+    /* ===== АДРЕС И РЕЖИМ ===== */
+    .info-blocks {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .info-card {
+        background-color: var(--cream);
+        border-left: 4px solid var(--accent);
+        padding: 28px;
+        border-radius: 6px;
+    }
+
+    .info-card h3 {
+        font-size: 1.3rem;
+        margin-bottom: 14px;
+        color: var(--coffee-medium);
+    }
+
+    .info-card p {
+        color: var(--text-soft);
+        font-size: 1.05rem;
+    }
+
+    /* ===== КОНТАКТЫ ===== */
+    .contacts {
+        background-color: var(--cream);
+        max-width: none;
+    }
+
+    .contacts-inner {
+        max-width: 800px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .contacts-info {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        align-items: center;
+        margin-top: 10px;
+    }
+
+    .contact-item {
+        font-size: 1.1rem;
+        color: var(--text);
+    }
+
+    .contact-item a {
+        color: var(--coffee-medium);
+        text-decoration: none;
+        font-weight: bold;
+        border-bottom: 1px solid transparent;
+        transition: border-color 0.2s, color 0.2s;
+    }
+
+    .contact-item a:hover {
+        color: var(--accent);
+        border-bottom-color: var(--accent);
+    }
+
+    /* ===== ФУТЕР ===== */
+    footer {
+        background-color: var(--coffee-dark);
+        color: var(--cream);
+        text-align: center;
+        padding: 30px 20px;
+        font-size: 0.9rem;
+    }
+
+    /* ===== АДАПТИВНОСТЬ ===== */
+    @media (max-width: 1024px) {
+        .menu-section {
+            padding: 70px 30px;
+        }
+        .menu-tabs {
+            margin: 0 -30px 40px;
+            padding: 0 30px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .hero h1 { font-size: 36px; }
+        .hero { padding: 100px 20px; }
+        section { padding: 60px 20px; }
+        .menu-section { padding: 60px 20px; }
+        .menu-section h2 { font-size: 2rem; margin-bottom: 36px; }
+        .menu-tabs { margin: 0 -20px 30px; padding: 0 20px; top: 60px; }
+        .menu-tab { padding: 14px 16px; font-size: 0.9rem; }
+        .menu-grid { grid-template-columns: 1fr; gap: 12px; }
+        .menu-category { scroll-margin-top: 130px; }
+        h2 { font-size: 1.7rem; }
+        nav { padding: 14px 20px; }
+        nav ul { gap: 16px; }
+    }
+
+    @media (max-width: 480px) {
+        .menu-section h2 { font-size: 1.8rem; }
+        .menu-category h3 { font-size: 1.5rem; }
+        .menu-item { padding: 18px 16px; }
+        .menu-item-name { font-size: 0.95rem; }
+        .menu-item-price { font-size: 1rem; }
+    }
+</style>
+</head>
+<body>
+
+<nav>
+    <div class="logo">Юми кофе</div>
+    <ul>
+        <li><a href="#about">О нас</a></li>
+        <li><a href="#menu">Меню</a></li>
+        <li><a href="#photos">Фото</a></li>
+        <li><a href="#address">Адрес</a></li>
+        <li><a href="#contacts">Контакты</a></li>
+    </ul>
+</nav>
+
+<!-- ПЕРВЫЙ ЭКРАН -->
+<section class="hero">
+    <h1>Юми кофе</h1>
+    <p class="subtitle">Свежий кофе, горячие напитки и домашние десерты</p>
+    <div class="schedule">Работаем ежедневно с 9:00 до 21:00</div>
+    <br>
+    <a href="#menu" class="btn">Посмотреть меню</a>
+</section>
+
+<!-- О КОФЕЙНЕ -->
+<section id="about">
+    <h2>О кофейне</h2>
+    <p class="about-text">
+        Юми кофе — это место, где можно спокойно провести время за чашкой кофе.
+        В меню представлены классические кофейные напитки, авторские позиции, горячие и холодные напитки,
+        а также десерты. Кофейня открыта каждый день и работает с утра до вечера.
+    </p>
+</section>
+
+<!-- ОСОБЕННОСТИ -->
+<section class="features" id="features">
+    <div class="features-inner">
+        <h2>Особенности</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>О заведении</h3>
+                <ul>
+                    <li>Ресторан / Кафе</li>
+                    <li>Средний чек: <span class="highlight">350 ₽</span></li>
+                    <li>Завтраки</li>
+                    <li>До 10 мест</li>
+                    <li>Можно с собакой</li>
+                </ul>
+            </div>
+            <div class="feature-card">
+                <h3>Сервис</h3>
+                <ul>
+                    <li>Заказ столиков</li>
+                    <li>Заказ навынос</li>
+                    <li>Столики на улице</li>
+                    <li>Проведение банкетов</li>
+                    <li>Бесплатный Wi-Fi</li>
+                </ul>
+            </div>
+            <div class="feature-card">
+                <h3>Для детей</h3>
+                <ul>
+                    <li>Детское меню</li>
+                    <li>Детский уголок</li>
+                    <li>Детская комната</li>
+                    <li>Настольные игры</li>
+                </ul>
+            </div>
+            <div class="feature-card">
+                <h3>Меню</h3>
+                <ul>
+                    <li>Пончики</li>
+                    <li>Сэндвичи</li>
+                    <li>Бутерброды</li>
+                </ul>
+            </div>
+            <div class="feature-card">
+                <h3>Напитки</h3>
+                <ul>
+                    <li>Кофе с собой</li>
+                    <li>Bubble Tea</li>
+                    <li>Чай с собой</li>
+                    <li>Молочные коктейли</li>
+                    <li>Горячий шоколад</li>
+                    <li>Какао</li>
+                    <li>Лимонад</li>
+                </ul>
+            </div>
+            <div class="feature-card">
+                <h3>Доставка</h3>
+                <ul>
+                    <li>Кофе</li>
+                </ul>
+            </div>
+            <div class="feature-card">
+                <h3>Способы оплаты</h3>
+                <ul>
+                    <li>Оплата картой</li>
+                    <li>Наличный расчёт</li>
+                    <li>Оплата по QR-коду</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== ПРОФЕССИОНАЛЬНЫЙ БЛОК МЕНЮ ===== -->
+<section class="menu-section" id="menu">
+    <h2>Меню</h2>
+
+    <!-- Sticky-панель табов для навигации по категориям -->
+    <div class="menu-tabs">
+        <div class="menu-tabs-inner">
+            <button class="menu-tab active" data-target="coffee">Кофе</button>
+            <button class="menu-tab" data-target="hot">Горячие напитки</button>
+            <button class="menu-tab" data-target="cold">Холодные напитки</button>
+            <button class="menu-tab" data-target="new">Новинки</button>
+            <button class="menu-tab" data-target="desserts">Десерты</button>
+        </div>
+    </div>
+
+    <!-- КОФЕ -->
+    <div class="menu-category" id="coffee">
+        <div class="menu-category-header">
+            <h3>Кофе</h3>
+            <div class="menu-category-line"></div>
+        </div>
+        <div class="menu-grid">
+            <div class="menu-item">
+                <div class="menu-item-info">
+                    <span class="menu-item-name">Капучино</span>
+                    <span class="menu-item-volume">200 мл.</span>
+                </div>
+                <span class="menu-item-dots"></span>
+                <span class="menu-item-price">190 ₽</span>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-info">
+                    <span class="menu-item-name">Латте</span>
+                    <span class="menu-item-volume">300 мл.</span>
+                </div>
+                <span class="menu-item-dots"></span>
+                <span class="menu-item-price">215 ₽</span>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-info">
+                    <span class="menu-item-name">Двойной эспрессо</span>
+                </div>
+                <span class="menu-item-dots"></span>
+                <span class="menu-item-price">150 ₽</span>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-info">
+                    <span class="menu-item-name">Раф</span>
+                    <span class="menu-item-volume">300 мл.</span>
+                </div>
+                <span class="menu-item-dots"></span>
+                <span class="menu-item-price">260 ₽</span>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-info">
+                    <span class="menu-item-name">Американо</span>
+                    <span class="menu-item-volume">200 мл.</span>
+                </div>
+                <span class="menu-item-dots"></span>
+                <span class="menu-item-price">150 ₽</span>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-info">
+                    <span class="menu-item-name">Флэт-уайт</span>
+                </div>
+                <span class="menu-item-dots"></span>
+                <span class="menu-item-price">240 ₽</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ГОРЯЧИЕ НАПИТКИ -->
+    <div class="menu-category" id="hot">
+        <div class="menu-category-header">
+            <h3>Горячие напитки</h3>
+            <div class="menu-category-line"></div>
+        </div>
+        <div class="menu-grid">
+            <div class="menu-item">
+                <div class="menu-item-info">
+                    <span class="menu-item-name">Какао</span>
+                    <span class="menu-item-volume">200 мл.</span>
+                </div>
+                <span class="menu-item-dots"></span>
+                <span class="menu-item-price">160 ₽</span>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-info">
+                    <span class="menu-item-name">Горячий шоколад</span>
+                    <span class="menu-item-volume">200 мл.</span>
+                </div>
+                <span class="menu-item-dots"></span>
+                <span class="menu-item-price">180 ₽</span>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-info">
+                    <span class="menu-item-name">Матча-латте</span>
+                </div>
+                <span class="menu-item-dots"></span>
+                <span class="menu-item-price">220 ₽</span>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-info">
+                    <span class="menu-item-name">Чай листовой в ассортименте</span>
+                </div>
+                <span class="menu-item-dots"></span>
+                <span class="menu-item-price">150 ₽</span>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-info">
+                    <span class="menu-item-name">Глинтвейн</span>
+                </div>
+                <span class="menu-item-dots"></span>
+                <span class="menu-item-price">280 ₽</span>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-info">
+                    <span class="menu-item-name">Чай в чайнике</span>
+                </div>
+                <span class="menu-item-dots"></span>
+                <span class="menu-item-price">290 ₽</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ХОЛОДНЫЕ НАПИТКИ -->
+    <div class="menu-category" id="cold">
+        <div class="menu-category-header">
+            <h3>Холодные напитки</h3>
+            <div class="menu-category-line"></div>
+        </div>
+        <div class="menu-grid">
+            <div class="menu-item">
+                <div class="menu-item-info">
+                    <span class="menu-item-name">Лимонад в ассортименте</span>
+                </div>
+                <span class="menu-item-dots"></span>
+                <span class="menu-item-price">230 ₽</span>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-info">
+                    <span class="menu-item-name">Бабл-ти / Babble-tea</span>
+                </div>
+                <span class="menu-item-dots"></span>
+                <span class="menu-item-price">290 ₽</span>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-info">
+                    <span class="menu-item-name">Мохито б/а</span>
+                </div>
+                <span class="menu-item-dots"></span>
+                <span class="menu-item-price">240 ₽</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- НОВИНКИ -->
+    <div class="menu-category" id="new">
+        <div class="menu-category-header">
+            <h3>Новинки</h3>
+            <div class="menu-category-line"></div>
+        </div>
+        <div class="menu-grid">
+            <div class="menu-item">
+                <span class="menu-badge new">NEW</span>
+                <div class="menu-item-info">
+                    <span class="menu-item-name">Bubble-лимонад</span>
+                </div>
+                <span class="menu-item-dots"></span>
+                <span class="menu-item-price">220 ₽</span>
+            </div>
+            <div class="menu-item">
+                <span class="menu-badge new">NEW</span>
+                <div class="menu-item-info">
+                    <span class="menu-item-name">Бамбл-кофе</span>
+                </div>
+                <span class="menu-item-dots"></span>
+                <span class="menu-item-price">280 ₽</span>
+            </div>
+            <div class="menu-item">
+                <span class="menu-badge new">NEW</span>
+                <div class="menu-item-info">
+                    <span class="menu-item-name">Эспрессо-тоник</span>
+                </div>
+                <span class="menu-item-dots"></span>
+                <span class="menu-item-price">240 ₽</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ДЕСЕРТЫ -->
+    <div class="menu-category" id="desserts">
+        <div class="menu-category-header">
+            <h3>Десерты</h3>
+            <div class="menu-category-line"></div>
+        </div>
+        <div class="menu-grid">
+            <div class="menu-item">
+                <div class="menu-item-info">
+                    <span class="menu-item-name">Трубочка с вареной сгущенкой</span>
+                </div>
+                <span class="menu-item-dots"></span>
+                <span class="menu-item-price">100 ₽</span>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-info">
+                    <span class="menu-item-name">Маффин шоколадный / апельсиновый</span>
+                </div>
+                <span class="menu-item-dots"></span>
+                <span class="menu-item-price">145 ₽</span>
+            </div>
+            <div class="menu-item">
+                <span class="menu-badge hit">ХИТ</span>
+                <div class="menu-item-info">
+                    <span class="menu-item-name">Чиз-кейк Нью-Йорк</span>
+                </div>
+                <span class="menu-item-dots"></span>
+                <span class="menu-item-price">210 ₽</span>
+            </div>
+            <div class="menu-item">
+                <span class="menu-badge hit">ХИТ</span>
+                <div class="menu-item-info">
+                    <span class="menu-item-name">Морковный торт</span>
+                </div>
+                <span class="menu-item-dots"></span>
+                <span class="menu-item-price">240 ₽</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA-блок -->
+    <div class="menu-cta">
+        <p>Не нашли то, что искали? Спросите бариста — мы всегда рады предложить что-то особенное.</p>
+    </div>
+
+    <!-- Кнопка возврата к началу меню -->
+    <a href="#menu" class="menu-back">↑ Вернуться к началу меню</a>
+</section>
+
+<!-- ФОТО-ЗАГЛУШКИ -->
+<section class="photos" id="photos">
+    <div class="photos-inner">
+        <h2>Атмосфера</h2>
+        <div class="photos-grid">
+            <div class="photo-placeholder">Фото интерьера</div>
+            <div class="photo-placeholder">Фото интерьера</div>
+            <div class="photo-placeholder">Фото напитка</div>
+            <div class="photo-placeholder">Фото напитка</div>
+            <div class="photo-placeholder">Фото десерта</div>
+            <div class="photo-placeholder">Фото десерта</div>
+        </div>
+    </div>
+</section>
+
+<!-- АДРЕС И РЕЖИМ РАБОТЫ -->
+<section id="address">
+    <h2>Адрес и режим работы</h2>
+    <div class="info-blocks">
+        <div class="info-card">
+            <h3>Адрес</h3>
+            <p>Новозаводская улица, 12,<br>Химки, Московская область</p>
+        </div>
+        <div class="info-card">
+            <h3>Режим работы</h3>
+            <p>Пн — Вс<br>09:00 – 21:00</p>
+        </div>
+    </div>
+</section>
+
+<!-- КОНТАКТЫ -->
+<section class="contacts" id="contacts">
+    <div class="contacts-inner">
+        <h2>Контакты</h2>
+        <div class="contacts-info">
+            <p class="contact-item">
+                <strong>Телефон:</strong> 
+                <a href="tel:+79150230406">+7 (915) 023-04-06</a>
+            </p>
+            <p class="contact-item">
+                <strong>ВКонтакте:</strong> 
+                <a href="https://vk.ru/yume_coffee" target="_blank" rel="noopener noreferrer">vk.ru/yume_coffee</a>
+            </p>
+            <p class="contact-item">
+                <strong>Telegram:</strong> 
+                <a href="https://t.me/yume_coffee" target="_blank" rel="noopener noreferrer">t.me/yume_coffee</a>
+            </p>
+        </div>
+    </div>
+</section>
+
+<footer>
+    © Юми кофе. Все права защищены.
+</footer>
+
+<script>
+    /* ===== ЛОГИКА ТАБОВ МЕНЮ ===== */
+    (function() {
+        const tabs = document.querySelectorAll('.menu-tab');
+        const categories = document.querySelectorAll('.menu-category');
+        const tabsContainer = document.querySelector('.menu-tabs');
+
+        // 1. Переключение табов по клику с плавным скроллом
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                const targetId = this.getAttribute('data-target');
+                const targetSection = document.getElementById(targetId);
+                if (!targetSection) return;
+
+                // Вычисляем позицию с учётом высоты sticky табов и навигации
+                const tabsHeight = tabsContainer.offsetHeight;
+                const navHeight = document.querySelector('nav').offsetHeight;
+                const offset = targetSection.getBoundingClientRect().top + window.pageYOffset - navHeight - tabsHeight - 20;
+
+                window.scrollTo({
+                    top: offset,
+                    behavior: 'smooth'
+                });
+
+                // Обновляем активный таб
+                tabs.forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // 2. Автоматическое обновление активного таба при скролле через Intersection Observer
+        // rootMargin настроен так, чтобы триггер срабатывал, когда верх секции находится
+        // чуть ниже sticky-панели табов
+        const observerOptions = {
+            root: null,
+            rootMargin: '-' + (document.querySelector('nav').offsetHeight + tabsContainer.offsetHeight + 20) + 'px 0px -60% 0px',
+            threshold: 0
+        };
+
+        const categoryObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.id;
+                    tabs.forEach(tab => {
+                        if (tab.getAttribute('data-target') === id) {
+                            tab.classList.add('active');
+                        } else {
+                            tab.classList.remove('active');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        categories.forEach(cat => categoryObserver.observe(cat));
+
+        // 3. Анимация появления карточек при скролле
+        const menuItems = document.querySelectorAll('.menu-item');
+
+        const itemObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    itemObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        });
+
+        // Каскадная задержка: карточки в одном ряду появляются одновременно,
+        // следующий ряд — с задержкой 80ms
+        menuItems.forEach(item => {
+            const grid = item.parentElement;
+            const siblings = Array.from(grid.children);
+            const index = siblings.indexOf(item);
+            const columns = window.innerWidth <= 768 ? 1 : 2;
+            const row = Math.floor(index / columns);
+            item.style.transition = 'opacity 0.5s ease-out, transform 0.5s ease-out';
+            item.style.transitionDelay = (row * 80) + 'ms';
+            itemObserver.observe(item);
+        });
+
+        // Пересчёт задержек при изменении размера окна (адаптивность колонок)
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                const columns = window.innerWidth <= 768 ? 1 : 2;
+                menuItems.forEach(item => {
+                    const grid = item.parentElement;
+                    const siblings = Array.from(grid.children);
+                    const index = siblings.indexOf(item);
+                    const row = Math.floor(index / columns);
+                    item.style.transitionDelay = (row * 80) + 'ms';
+                });
+            }, 200);
+        });
+    })();
+</script>
+
+</body>
+</html>
